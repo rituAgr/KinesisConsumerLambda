@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.agrawal</groupId>
+	<artifactId>KinesisConsumerLambda</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>KinesisConsumerLambda</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-core -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-lambda-java-core</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-events -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-lambda-java-events</artifactId>
+			<version>3.11.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-assembly-plugin</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+		<!--		com.agrawal.KinesisConsumerLambda.OrdersLambda-->
+
+	</dependencies>
+
+	<build>
+		<finalName>orders-lambda</finalName>
+	<plugins>
+
+<!--		Below maven plugin is required to get jar with dependency-->
+		<!-- Maven Assembly Plugin -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-assembly-plugin</artifactId>
+			<version>3.6.0</version>
+			<configuration>
+				<!-- get all project dependencies -->
+				<descriptorRefs>
+					<descriptorRef>jar-with-dependencies</descriptorRef>
+				</descriptorRefs>
+				<archive>
+					<manifest>
+						<mainClass>com.agrawal.KinesisConsumerLambda.OrdersLambda</mainClass>
+					</manifest>
+				</archive>
+
+			</configuration>
+			<executions>
+				<execution>
+					<id>make-assembly</id>
+					<!-- bind to the packaging phase -->
+					<phase>package</phase>
+					<goals>
+						<goal>single</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+
+	</plugins>
+    </build>
+
+</project>
